@@ -1,6 +1,8 @@
-import { Form, Formik, ErrorMessage } from "formik";
+import { Form, Formik } from "formik";
 
 import {
+  Error,
+  FieldContainer,
   FieldsWrapper,
   Input,
   InputWrapper,
@@ -37,20 +39,34 @@ const PaymentForm = () => {
       >
         {({ isSubmitting }) => (
           <Form>
-            <Label>Card Number</Label>
-            <Input type="text" name="cardNumber" />
-            <ErrorMessage name="cardNumber" component={"p"} />
+            <FieldContainer>
+              <Label>Card Number</Label>
+              <Input
+                type="text"
+                name="cardNumber"
+                placeholder="1234 1234 1234 1234 "
+              />
+              <Error name="cardNumber" component={"p"} />
+            </FieldContainer>
 
             <FieldsWrapper>
               <InputWrapper>
-                <Label>Expiration Date</Label>
-                <Input type="text" name="expirationDate" placeholder="MM/YY" />
-                <ErrorMessage name="expirationDate" component={"p"} />
+                <FieldContainer>
+                  <Label>Expiration Date</Label>
+                  <Input
+                    type="text"
+                    name="expirationDate"
+                    placeholder="MM/YY"
+                  />
+                  <Error name="expirationDate" component={"p"} />
+                </FieldContainer>
               </InputWrapper>
               <InputWrapper>
-                <Label>CVC</Label>
-                <Input type="text" name="cvc" />
-                <ErrorMessage name="cvc" component={"p"} />
+                <FieldContainer>
+                  <Label>CVC</Label>
+                  <Input type="text" name="cvc" placeholder="•••" />
+                  <Error name="cvc" component={"p"} />
+                </FieldContainer>
               </InputWrapper>
             </FieldsWrapper>
 

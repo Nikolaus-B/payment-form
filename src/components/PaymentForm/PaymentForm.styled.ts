@@ -1,4 +1,4 @@
-import { Field } from "formik";
+import { ErrorMessage, Field } from "formik";
 import styled from "styled-components";
 
 interface PaymentButtonProps {
@@ -7,6 +7,10 @@ interface PaymentButtonProps {
 
 export const PaymentFormContainer = styled.div`
   max-width: 420px;
+`;
+
+export const FieldContainer = styled.div`
+  position: relative;
 `;
 
 export const FieldsWrapper = styled.div`
@@ -33,33 +37,21 @@ export const Input = styled(Field)`
   box-sizing: border-box;
 `;
 
+export const Error = styled(ErrorMessage)`
+  position: absolute;
+  left: 0;
+  bottom: -16px;
+
+  font-size: 12px;
+
+  color: red;
+`;
+
 export const Label = styled.label`
   font-size: 12px;
   font-weight: 500;
   color: #666c7b;
 `;
-
-// const fadeUp = keyframes`
-//   from {
-//     transform: translateY(16px);
-//     opacity: 0;
-//   }
-//   to {
-//     transform: translateY(0);
-//     opacity: 1;
-//   }
-// `;
-
-// const fadeDown = keyframes`
-//   from {
-//     transform: translateY(0);
-//     opacity: 1;
-//   }
-//   to {
-//     transform: translateY(-16px);
-//     opacity: 0;
-//   }
-// `;
 
 export const PaymentButton = styled.button<PaymentButtonProps>`
   position: relative;
