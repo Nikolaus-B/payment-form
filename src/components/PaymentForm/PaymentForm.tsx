@@ -1,5 +1,6 @@
 import { Form, Formik } from "formik";
-
+import subtract from "/subtract.svg";
+import loader from "/loader.svg";
 import {
   Error,
   FieldContainer,
@@ -7,10 +8,18 @@ import {
   Input,
   InputWrapper,
   Label,
+  LoaderIcon,
   PaymentButton,
   PaymentFormContainer,
+  ProcessingContainer,
+  SubtractIcon,
 } from "./PaymentForm.styled";
 import { useState } from "react";
+
+import {
+  formatCardNumber,
+  formatExpirationDate,
+} from "../../utils/formatValidations";
 import { paymentValidationSchema } from "../../schemas/paymentValidationSchema";
 
 const PaymentForm = () => {
@@ -37,14 +46,19 @@ const PaymentForm = () => {
           processing(values);
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, setFieldValue }) => (
           <Form>
             <FieldContainer>
               <Label>Card Number</Label>
               <Input
                 type="text"
                 name="cardNumber"
-                placeholder="1234 1234 1234 1234 "
+                placeholder="1234 1234 1234 1234"
+                maxLength={19}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  const formattedCardNumber = formatCardNumber(e.target.value);
+                  setFieldValue("cardNumber", formattedCardNumber);
+                }}
               />
               <Error name="cardNumber" component={"p"} />
             </FieldContainer>
@@ -54,9 +68,15 @@ const PaymentForm = () => {
                 <FieldContainer>
                   <Label>Expiration Date</Label>
                   <Input
-                    type="text"
+                    type="tel"
                     name="expirationDate"
                     placeholder="MM/YY"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      const formattedDate = formatExpirationDate(
+                        e.target.value
+                      );
+                      setFieldValue("expirationDate", formattedDate);
+                    }}
                   />
                   <Error name="expirationDate" component={"p"} />
                 </FieldContainer>
@@ -64,8 +84,15 @@ const PaymentForm = () => {
               <InputWrapper>
                 <FieldContainer>
                   <Label>CVC</Label>
-                  <Input type="text" name="cvc" placeholder="•••" />
+                  <Input
+                    type="text"
+                    name="cvc"
+                    maxLength={4}
+                    placeholder="•••"
+                    pattern="\d{3,4}"
+                  />
                   <Error name="cvc" component={"p"} />
+                  <SubtractIcon src={subtract} alt="subtract icon" />
                 </FieldContainer>
               </InputWrapper>
             </FieldsWrapper>
@@ -73,14 +100,13 @@ const PaymentForm = () => {
             <PaymentButton
               type="submit"
               disabled={isSubmitting}
-              // isLoading={isLoading}
               isProcessing={isProcessing}
             >
-              {!isProcessing ? (
-                <span>Pay 299.99 UAH</span>
-              ) : (
-                <span>Processing...</span>
-              )}
+              <span className="pay">Pay 299.99 UAH</span>
+              <ProcessingContainer className="processing">
+                <LoaderIcon src={loader} alt="loader icon" />
+                <span>Processing payment</span>
+              </ProcessingContainer>
             </PaymentButton>
           </Form>
         )}

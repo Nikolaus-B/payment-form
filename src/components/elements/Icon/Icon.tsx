@@ -1,4 +1,4 @@
-import sprite from "../../../assets/sprite.svg";
+import sprite from "/sprite.svg";
 
 interface IconProps {
   iconId: string;
@@ -8,9 +8,11 @@ interface IconProps {
 
 const Icon = ({ iconId, height, width }: IconProps) => {
   return (
-    <svg width={width} height={height}>
-      <use href={`${sprite}#${iconId}`}></use>
-    </svg>
+    <>
+      <svg width={width} height={height}>
+        <use href={`${sprite}#${iconId}`}></use>
+      </svg>
+    </>
   );
 };
 export default Icon;

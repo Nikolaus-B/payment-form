@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const OrderSummaryContainer = styled.div`
   max-width: 388px;
+  height: fit-content;
   padding: 12px 16px 16px;
 
   border-radius: 8px;

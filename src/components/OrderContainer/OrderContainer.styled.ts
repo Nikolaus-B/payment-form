@@ -6,7 +6,7 @@ export const OrderSectionContainer = styled.section`
   gap: 32px;
 
   justify-content: center;
-  /* align-items: center; */
+
   margin: 0 auto;
 
   max-width: 872px;
@@ -18,6 +18,33 @@ export const OrderSectionContainer = styled.section`
 
 export const CardContainer = styled.div`
   max-width: 420px;
+`;
+
+export const Price = styled.p`
+  font-size: 24px;
+  line-height: 32px;
+
+  font-weight: 600;
+
+  text-align: center;
+
+  @media (min-width: 999px) {
+    line-height: 40px;
+    text-align: left;
+  }
+`;
+
+export const PriceAdditionalInfo = styled.p`
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+
+  margin-bottom: 24px;
+
+  @media (min-width: 999px) {
+    line-height: 24px;
+    text-align: left;
+  }
 `;
 
 export const PaymentSeparator = styled.div`

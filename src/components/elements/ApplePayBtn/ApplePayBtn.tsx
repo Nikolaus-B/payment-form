@@ -1,10 +1,10 @@
-import Icon from "../Icon/Icon";
 import { ApplePayButtonStyled } from "./ApplePayBtn.styled";
+import applepay from "/applepay.svg";
 
 const ApplePayBtn = () => {
   return (
     <ApplePayButtonStyled>
-      <Icon width="49" height="20" iconId="applepay" />
+      <img src={applepay} alt="Applepay logo" />
     </ApplePayButtonStyled>
   );
 };

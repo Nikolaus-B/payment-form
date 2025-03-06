@@ -1,10 +1,6 @@
 import { ErrorMessage, Field } from "formik";
 import styled from "styled-components";
 
-interface PaymentButtonProps {
-  isProcessing?: boolean;
-}
-
 export const PaymentFormContainer = styled.div`
   max-width: 420px;
 `;
@@ -53,37 +49,81 @@ export const Label = styled.label`
   color: #666c7b;
 `;
 
-export const PaymentButton = styled.button<PaymentButtonProps>`
-  position: relative;
+export const SubtractIcon = styled.img`
+  position: absolute;
+  right: 13px;
+  top: 57%;
+`;
 
+export const ProcessingContainer = styled.div`
   display: flex;
+  gap: 3px;
+  /* width: 360px; */
+
   justify-content: center;
   align-items: center;
-  overflow: hidden;
 
+  position: absolute;
+`;
+
+export const LoaderIcon = styled.img`
+  width: 20px;
+  height: 20px;
+
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
+export const PaymentButton = styled.button<{ isProcessing: boolean }>`
+  position: relative;
   width: 100%;
   padding: 12px 16px;
   margin-top: 16px;
 
-  background-color: #028837;
-  color: #ffffff;
+  height: 50px;
+  background-color: ${({ isProcessing }) =>
+    isProcessing ? "hsl(145, 60%, 45%)" : "hsl(145, 60%, 40%)"};
+  color: white;
   font-size: 16px;
   font-weight: 600;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
+  overflow: hidden;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 120ms ease-out, background-color 120ms ease-out;
 
-  transition: background-color 120ms ease-out, transform 120ms ease-out;
+  ${({ isProcessing }) => isProcessing && "transform: translateY(-2px);"}
 
   &:hover {
     background-color: #029c3f;
     transform: translateY(-2px);
   }
 
-  ${({ isProcessing }) =>
-    isProcessing &&
-    `
-    background-color: hsl(144, 100%, 34%);
-    transform: translateY(-2px);
-  `}
+  .pay {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    transition: transform 120ms ease-out, opacity 120ms ease-out;
+    opacity: ${({ isProcessing }) => (isProcessing ? 0 : 1)};
+    transform: ${({ isProcessing }) =>
+      isProcessing ? "translateY(-16px)" : "translateY(0)"};
+  }
+
+  .processing {
+    opacity: ${({ isProcessing }) => (isProcessing ? 1 : 0)};
+    transform: ${({ isProcessing }) =>
+      isProcessing ? "translateY(-10%)" : "translateY(16px)"};
+    display: ${({ isProcessing }) => (isProcessing ? "flex" : "none")};
+  }
 `;
