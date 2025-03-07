@@ -21,6 +21,7 @@ import {
   formatExpirationDate,
 } from "../../utils/formatValidations";
 import { paymentValidationSchema } from "../../schemas/paymentValidationSchema";
+import toast from "react-hot-toast";
 
 const PaymentForm = () => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -30,11 +31,8 @@ const PaymentForm = () => {
     expirationDate: string;
     cvc: string;
   }) => {
-    setIsProcessing(true);
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setIsProcessing(false);
-    }, 2000);
+    toast.success(JSON.stringify(values, null, 2));
+    setIsProcessing(false);
   };
 
   return (
@@ -42,8 +40,14 @@ const PaymentForm = () => {
       <Formik
         initialValues={{ cardNumber: "", expirationDate: "", cvc: "" }}
         validationSchema={paymentValidationSchema}
-        onSubmit={(values) => {
-          processing(values);
+        onSubmit={(values, { setSubmitting, resetForm }) => {
+          setIsProcessing(true);
+          setTimeout(() => {
+            processing(values);
+
+            setSubmitting(false);
+            resetForm();
+          }, 2000);
         }}
       >
         {({ isSubmitting, setFieldValue }) => (

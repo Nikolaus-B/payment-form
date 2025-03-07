@@ -1,10 +1,12 @@
 import { Seperator } from "../../styles/componentsStyles/Separator";
 import ApplePayBtn from "../elements/ApplePayBtn/ApplePayBtn";
+import OrderHeader from "../OrderHeader/OrderHeader";
 import OrderSummary from "../OrderSummary/OrderSummary";
 import PaymentForm from "../PaymentForm/PaymentForm";
 import {
   CardContainer,
-  OrderSectionContainer,
+  OrderCardWrapper,
+  OrderSection,
   PaymentSeparator,
   PaymentSeparatorText,
   PlanInfo,
@@ -15,8 +17,9 @@ import {
 
 const OrderContainer = () => {
   return (
-    <>
-      <OrderSectionContainer>
+    <OrderSection>
+      <OrderHeader />
+      <OrderCardWrapper>
         <CardContainer>
           <Price>5 days free</Price>
           <PriceAdditionalInfo>then 299.99 UAH per 14 days</PriceAdditionalInfo>
@@ -38,8 +41,8 @@ const OrderContainer = () => {
         </CardContainer>
 
         <OrderSummary />
-      </OrderSectionContainer>
-    </>
+      </OrderCardWrapper>
+    </OrderSection>
   );
 };
 

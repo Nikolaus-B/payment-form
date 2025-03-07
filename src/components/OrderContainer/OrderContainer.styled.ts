@@ -1,15 +1,20 @@
 import styled from "styled-components";
 
-export const OrderSectionContainer = styled.section`
+export const OrderSection = styled.section`
+  max-width: 872px;
+  margin: 20px auto 0;
+`;
+
+export const OrderCardWrapper = styled.section`
   display: flex;
   flex-direction: column;
   gap: 32px;
 
   justify-content: center;
 
-  margin: 0 auto;
-
-  max-width: 872px;
+  @media (max-width: 999px) {
+    align-items: center;
+  }
 
   @media (min-width: 1000px) {
     flex-direction: row;
